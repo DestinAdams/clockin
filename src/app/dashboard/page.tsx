@@ -1,6 +1,8 @@
 import React from "react";
-export default function dashboard() {
+
+
+export default function Dashboard() {
     return (
-        <div><h1 className="text-black">dashboard</h1></div>
+        <p>dashboard page</p>
     );
 }
