@@ -3,6 +3,6 @@ import React from "react";
 
 export default function Dashboard() {
     return (
-        <p>dashboard page</p>
+        <p>Dashddwdrd page</p>
     );
 }
