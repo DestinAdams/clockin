@@ -1,4 +1,4 @@
-import { fetchData,insertData } from "../lib/data";
+import { fetchData } from "../lib/data";
 import type { user } from "../lib/definitions"; // Adjust path if needed
 
 export default async function Dashboard() {
@@ -42,7 +42,7 @@ export default async function Dashboard() {
                         </tbody>
                     </table>
                 </div>
-                    
+
             </div>
         </div>
     );
