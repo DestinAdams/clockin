@@ -19,3 +19,20 @@ export async function fetchData() {
 
     }
 }
+
+export async function insertData(name: string, value: number) {
+    try {
+        const result = await sql`INSERT INTO playing_with_neon (name, value) VALUES (${name}, ${value}) RETURNING *`;
+
+        console.log("Data inserted successfully:", result);
+
+        return result;
+
+    } catch (error) {
+        console.error("Error inserting data:", error);
+        throw error;
+    } finally {
+        console.log("Data inserted successfully");
+    }
+}
+
