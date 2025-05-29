@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function DashboardPage() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Dashboard</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-300 p-6">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4 ">Dashboard</h1>
             <p className="text-lg text-gray-600 mb-8">
                 Welcome to your dashboard! Here you can track your hours worked and earnings.
             </p>
