@@ -14,7 +14,7 @@ export default function NewEntry() {
                         <input
                             type="date"
                             id="startDate"
-                            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border text-gray-700 border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 
@@ -25,7 +25,7 @@ export default function NewEntry() {
                         <input
                             type="date"
                             id="endDate"
-                            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border text-gray-700 border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 
@@ -37,8 +37,18 @@ export default function NewEntry() {
                             type="number"
                             id="totalHours"
                             placeholder="e.g. 40"
-                            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 text-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div>
+                    <div>
+                        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description of work
+                            <input type="string"
+                                id=""
+                                placeholder="Worked my best!"
+                                className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+
+                        </label>
                     </div>
 
                     <button
