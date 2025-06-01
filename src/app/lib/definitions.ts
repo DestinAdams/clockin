@@ -4,11 +4,10 @@ export type user = {
     value: number;
 }
 
-export type work = {
+export type workEntry = {
     id: number;
-    user_id: number;
-    hours: number;
-    startDate: Date;
+    startDate: Date
     endDate: Date;
-    description: string;
+    hoursWorked: number;
+    description: Text;
 }

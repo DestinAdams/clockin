@@ -1,4 +1,5 @@
-import { type user } from "../lib/definitions";
+import { type user, workEntry } from "../lib/definitions";
+
 import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -16,23 +17,42 @@ export async function fetchData() {
         throw error;
     } finally {
         console.log("Data fetched successfully");
-
     }
 }
 
-export async function insertData(name: string, value: number) {
+export async function addWorkEntry(startDate: string, endDate: string, hoursWorked: number, description: string) {
     try {
-        const result = await sql`INSERT INTO playing_with_neon (name, value) VALUES (${name}, ${value}) RETURNING *`;
+        const data = await sql`
+            INSERT INTO work_entries (startDate, endDate, hoursWorked, description)
+            VALUES (${startDate}, ${endDate}, ${hoursWorked}, ${description})
+        `;
 
-        console.log("Data inserted successfully:", result);
-
-        return result;
-
+        console.log("Work entry added successfully:", data);
+        return data;
     } catch (error) {
-        console.error("Error inserting data:", error);
+        console.error("Error adding work entry:", error);
         throw error;
     } finally {
-        console.log("Data inserted successfully");
+        console.log("Work entry operation completed");
     }
 }
+
+
+
+
+export async function getWorkEntries() {
+    try {
+        const entries = await sql`SELECT * FROM work_entries`;
+        console.log("Work entries fetched successfully:", entries);
+        return entries;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+    } finally {
+        console.log("Data fetched successfully");
+    }
+}
+
+
+
 

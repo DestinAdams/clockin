@@ -1,49 +1,36 @@
-import { fetchData } from "../lib/data";
-import type { user } from "../lib/definitions"; // Adjust path if needed
-
-export default async function Dashboard() {
-    const result: user[] = await fetchData();
 
 
+export default function DashboardLayout() {
     return (
-        <div className="flex min-h-screen">
-            <div className="flex-1 p-10">
-                <h1 className="text-8xl font-bold text-gray-800 text-shadow-2xs text-shadow-gray-300 text-right mb-8">
-                    DASHBOARD
-                </h1>
-                <p className="text-lg text-gray-600 mb-6">
-                    Welcome to your dashboard! Here you can track your hours worked and earnings.
-                </p>
+        <div className=" bg-gray-100">
+            
 
-                <div className="flex flex-col p-10 bg-gray-100 rounded-lg shadow-lg space-y-4">
-                    <table className="min-w-full text-sm text-gray-700 outline">
-                        <thead className="bg-gray-300 text-xs uppercase text-gray-800 ">
-                            <tr>
-                                <th className="px-6 py-4 text-left">ID</th>
-                                <th className="px-6 py-4 text-left">Name</th>
-                                <th className="px-6 py-4 text-left">Hours</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {result.map((user) => (
-                                <tr key={user.id} className="border-t">
-                                    <td className="px-6 py-4">{user.id}</td>
-                                    <td className="px-6 py-4">{user.name}</td>
-                                    <td className="px-6 py-4">{user.value}</td>
-                                </tr>
-                            ))}
-                            {result.length === 0 && (
-                                <tr>
-                                    <td colSpan={3} className="px-6 py-4 text-center text-gray-400">
-                                        No users found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
 
-            </div>
+
+
+            {/* Main Content */}
+            <main className="p-6">
+
+                <section className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className=" mt-6 bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Hours Worked</h2>
+                        <p className="text-gray-700">This section will display hours worked and earnings.</p>
+                        {/* Placeholder for future content */}
+                    </div>
+
+                    <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Activity</h2>
+                        <p className="text-gray-700">This section will display recent activity.</p>
+                        {/* Placeholder for future content */}
+                    </div>
+                    <div className="mt-6 bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Notifications</h2>
+                        <p className="text-gray-700">This section will display notifications.</p>
+                        {/* Placeholder for future content */}
+                    </div>
+                </section>
+
+            </main>
         </div>
     );
 }
