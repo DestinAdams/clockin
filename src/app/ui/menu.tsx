@@ -3,8 +3,8 @@ export default function Menu() {
         <header className="bg-white shadow-md px-6 py-4">
             <div className="flex items-center justify-between">
                 <div>
-                    
-                    
+
+
                 </div>
 
                 {/* Profile placeholder */}

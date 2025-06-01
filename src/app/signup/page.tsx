@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function SignupPage() {
     return (
         <div>
             {/* Hero Section */}
@@ -11,22 +11,31 @@ export default function LoginPage() {
                             ← Back to Home
                         </Link>
                     </div>
-                    <h1 className="text-3xl font-bold text-center mb-4 text-blue-500">Login</h1>
-
+                    <h1 className="text-3xl font-bold text-center mb-4 text-blue-500">Sign Up</h1>
+                    <p className="text-center mb-6 text-gray-600">Create your account</p>
 
                     <form className="space-y-4">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                             <input
                                 type="text"
-                                id="email"
-                                name="email"
+                                id="username"
+                                name="username"
                                 required
-                                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
+                                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
 
-
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
 
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
@@ -35,7 +44,7 @@ export default function LoginPage() {
                                 id="password"
                                 name="password"
                                 required
-                                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
+                                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
 
@@ -43,14 +52,14 @@ export default function LoginPage() {
                             type="submit"
                             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                         >
-                            Login
+                            Sign Up
                         </button>
                     </form>
 
                     <p className="text-center mt-6 text-sm text-gray-600">
-                        Don't have an Account?{" "}
-                        <Link href="/signup" className="text-blue-600 hover:underline">
-                            Sign Up here
+                        Already have an account?{" "}
+                        <Link href="/login" className="text-blue-600 hover:underline">
+                            Login here
                         </Link>
                     </p>
                 </div>
