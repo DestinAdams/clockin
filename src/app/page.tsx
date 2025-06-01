@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "./ui/mainMenu";
-
+import SignIn from "./components/auth/signin-button"
 export default function Home() {
   return (
     <div className="relative z-10 min-h-screen bg-white">
@@ -16,12 +16,11 @@ export default function Home() {
           <h2 className="text-lg text-gray-600 mb-8">
             Track your hours worked during the week and calculate your earnings effortlessly.
           </h2>
-          <Link
-            href="/login"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition"
-          >
-            Get Started
-          </Link>
+          <link href="/dashboard" className="text-black">
+          </link>
+
+          <SignIn />
+
           <p className="text-sm text-gray-500 mt-6 italic">
             (built by a tired dev, be patient 🧠💤)
           </p>

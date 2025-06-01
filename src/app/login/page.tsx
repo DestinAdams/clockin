@@ -1,6 +1,26 @@
 import Link from "next/link";
-
+// import { SignIn } from "@/app/components/auth/signin-button";
 export default function LoginPage() {
+
+    // This page is for user login
+    // It includes a form for email and password input
+    // and a link to the signup page if the user doesn't have an account.
+    // The form will handle the login logic (not implemented here)
+    // The page also includes a link to go back to the home page.
+    // The design is responsive and uses Tailwind CSS for styling.
+    //                         <Link href="/signup" className="text-blue-600 hover:underline">
+    //                         Sign Up here
+    //                         </Link>
+
+
+
+
+
+
+
+
+
+
     return (
         <div>
             {/* Hero Section */}
@@ -38,9 +58,9 @@ export default function LoginPage() {
                                 className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
                             />
                         </div>
-
                         <button
-                            type="submit"
+                            type="button"
+                            
                             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                         >
                             Login

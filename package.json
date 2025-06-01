@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/neon-adapter": "^1.9.1",
     "@neondatabase/serverless": "^1.0.0",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
+    "next-auth": "^5.0.0-beta.28",
     "postgres": "^3.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
