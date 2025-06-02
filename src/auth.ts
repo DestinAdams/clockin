@@ -20,5 +20,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
     return {
         adapter: NeonAdapter(pool),
         providers: [Google({ clientId: AUTH_GOOGLE_ID, clientSecret: AUTH_GOOGLE_SECRET })],
+
     }
 }) 

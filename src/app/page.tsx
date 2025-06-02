@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Menu from "./ui/mainMenu";
 import SignIn from "./components/auth/signin-button"
+import Footer from "@/app/ui/footer"
 export default function Home() {
   return (
     <div className="relative z-10 min-h-screen bg-white">
@@ -52,17 +53,7 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-gray-200 py-6">
-        <div className="text-center text-gray-600">
-          <p className="text-sm">© {new Date().getFullYear()} ClockIn. All rights reserved.</p>
-          <p className="text-xs mt-2">
-            Built with ❤️ by a tired dev. <br />
-            <Link href="/privacy" className="text-blue-600 hover:underline">
-              Privacy Policy
-            </Link>
-          </p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }
