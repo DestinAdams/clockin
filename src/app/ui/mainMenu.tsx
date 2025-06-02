@@ -1,3 +1,5 @@
+import SignIn from "@/app/components/auth/signin-button"
+
 export default function Menu() {
     return (
         <header className="bg-white shadow-md px-6 py-4">
@@ -19,12 +21,7 @@ export default function Menu() {
 
                 {/* Right: Login Button */}
                 <div>
-                    <a
-                        href="/login"
-                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-                    >
-                        Login
-                    </a>
+                    <SignIn />
                 </div>
             </div>
         </header>

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Menu from "./ui/mainMenu";
 import SignIn from "./components/auth/signin-button"
 import Footer from "@/app/ui/footer"
@@ -17,8 +16,6 @@ export default function Home() {
           <h2 className="text-lg text-gray-600 mb-8">
             Track your hours worked during the week and calculate your earnings effortlessly.
           </h2>
-          <link href="/dashboard" className="text-black">
-          </link>
 
           <SignIn />
 
@@ -53,7 +50,7 @@ export default function Home() {
       </section>
 
       {/* Footer Section */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
