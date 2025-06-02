@@ -1,6 +1,5 @@
 import type { workEntry } from "../../lib/definitions";
 import { getWorkEntries } from "../../lib/data";
-import { ArrowBigRightDash } from "lucide-react";
 
 export default async function History() {
     const result: workEntry[] = await getWorkEntries();

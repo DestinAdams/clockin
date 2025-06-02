@@ -1,13 +1,7 @@
-
-
 export default function DashboardLayout() {
     return (
         <div className=" bg-gray-100">
             
-
-
-
-
             {/* Main Content */}
             <main className="p-6">
 

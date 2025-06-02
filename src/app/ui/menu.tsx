@@ -30,7 +30,7 @@ export default function Menu() {
                     <img
                         src={profileImage}
                         alt="Profile"
-                        className="w-10 h-10 rounded-full mb-1"
+                        className="w-10 h-10 rounded-full mb-1 border-2 border-black "
                     />
                     <h1 className="text-sm text-gray-700">
                         {username ? `Welcome back, ${username}` : "Welcome back"}

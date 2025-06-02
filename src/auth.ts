@@ -18,7 +18,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
     const pool = new Pool({ connectionString })
 
     return {
-        adapter: NeonAdapter(pool),
+        adapter: NeonAdapter(pool), 
         providers: [Google({ clientId: AUTH_GOOGLE_ID, clientSecret: AUTH_GOOGLE_SECRET })],
 
     }
