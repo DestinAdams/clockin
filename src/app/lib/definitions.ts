@@ -5,9 +5,9 @@ export type user = {
 }
 
 export type workEntry = {
-    id: number;
-    startDate: Date
-    endDate: Date;
-    hoursWorked: number;
+    entry_id: number
+    user_id: string;
+    work_date: Date;
     description: Text;
+    hours: number;
 }
