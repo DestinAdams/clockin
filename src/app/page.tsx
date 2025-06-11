@@ -2,11 +2,12 @@ import Image from "next/image";
 import Menu from "./ui/mainMenu";
 import SignIn from "./components/auth/signin-button"
 import Footer from "@/app/ui/footer"
+
+
 export default function Home() {
   return (
     <div className="relative z-10 min-h-screen bg-white">
-      <Menu />
-
+      <Menu/>
       {/* Hero Section */}
       <main className="relative bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(37,99,235,0.5)_100%)] min-h-screen flex items-center justify-center px-4">
         <div className="text-center max-w-xl">

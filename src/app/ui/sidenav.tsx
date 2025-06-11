@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, X, LayoutDashboard, CirclePlus, History, House } from 'lucide-react';
+import { Menu, X, LayoutDashboard, CirclePlus, History, House, BoxIcon, Download } from 'lucide-react';
 
 
 function SideNav() {
@@ -62,19 +62,31 @@ function SideNav() {
 
                             {!isCollapsed && <span>History</span>}
                         </Link>
+                        <Link
+                            href="/dashboard/export"
+
+
+                            className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
+                        >
+                            <div>
+                                <Download size={20} color='black' />
+                            </div>
+                            <div>{!isCollapsed && <span>Export</span>}</div>
+
+                        </Link>
                     </ul>
                 </div>
 
                 {/* Bottom section */}
                 <div className="p-4">
-                        <Link
-                            href="/"
-                            className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
-                        >
-                            <div><House size={20} color='black' /></div>
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
+                    >
+                        <div><House size={20} color='black' /></div>
 
-                            {!isCollapsed && <span>Home</span>}
-                        </Link>
+                        {!isCollapsed && <span>Home</span>}
+                    </Link>
                 </div>
             </nav>
         </div>

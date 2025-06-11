@@ -14,11 +14,9 @@ export default function About() {
                         quisquam veritatis quia neque!
                     </p>
                 </section>
-                
+
             </main>
             <Footer />
         </div>
     );
-
-
 }
