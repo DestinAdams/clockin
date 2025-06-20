@@ -17,18 +17,18 @@ export async function addWorkEntry(user_id: number, work_date: Date, description
     }
 }
 export async function deleteWorkEntry(entry_id: number) {
-    // try {
-    // const result = await sql`DELETE FROM workEntries WHERE id = ${entry_id}`;
-
-    console.log(`Entry with ID ${entry_id} deleted successfully.`);
-    // return result;
-    // } catch (error) {
-    //     console.error(`Failed to delete entry with ID ${entry_id}:`, error);
-    //     throw error;
-    // } finally {
-    //     console.log("Delete operation completed");
-    // }
+    try {
+        const result = await sql`DELETE FROM workentries WHERE id = ${entry_id}`;
+        console.log(`Entry with ID ${entry_id} deleted successfully.`);
+        return result;
+    } catch (error) {
+        console.error(`Failed to delete entry with ID ${entry_id}:`, error);
+        throw error;
+    } finally {
+        console.log("Delete operation completed");
+    }
 }
+
 
 export async function getWorkEntries(user_id: number) {
     try {
