@@ -1,54 +1,66 @@
 'use client';
-import { addWorkEntry } from "@/app/lib/data";
-import { getUserId } from "@/app/api/auth/getUserNameServerAction"
-
+import { getUserId } from "@/app/api/auth/getUserNameServerAction";
 export default function NewEntry() {
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e);
-        //     const formData = new FormData(e.currentTarget);
+        const formData = new FormData(e.currentTarget);
 
-        //     const date = formData.get('date') as string;
+        try {
+            const user_id = await getUserId() as number;
 
-        //     // ✅ Convert string to number
-        //     const hoursWorked = parseFloat(formData.get('hoursWorked') as string);
-        //     const description = formData.get('description') as string;
+            if (!user_id) throw new Error("User ID is null. Please ensure you are logged in.");
 
-        //     try {
+            const work_date = new Date(formData.get('work_date') as string);
+            const hours_worked = parseFloat(formData.get('hours_worked') as string);
 
-        //         console.log("Submitting entry:", {
-        //             date,
-        //             hoursWorked,
-        //             description
-        //         });
+            if (isNaN(hours_worked)) throw new Error("Invalid input for hours worked");
 
-        //         await addWorkEntry(date, hoursWorked, description);
-        //         alert("Entry submitted successfully!");
-        //         e.target.reset(); // Clear the form
-        //     } catch (error) {
-        //         console.error("Failed to submit entry:", error);
-        //         alert("There was an error submitting the entry.");
-        //     }
+            const description = formData.get('description') as string;
+            const response = await fetch('/api/workentry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id, work_date, description, hours_worked }),
+            });
+            if (!response.ok) throw new Error("Failed to submit work entry, bad api request");
+
+            console.log("Submitting entry:", {
+                user_id,
+                work_date,
+                description,
+                hours_worked,
+            });
+
+
+
+            alert("Entry submitted successfully!");
+            e.preventDefault();
+
+        } catch (error) {
+            console.error("Failed to submit entry:", error);
+            alert("There was an error submitting the entry.");
+        }
     };
+
 
     return (
         <div className="bg-gray-100 min-h-screen">
-            <main className="p-6">
+            <main className="space y-6 p-6">
                 <form
                     className="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto text-black"
                     onSubmit={handleSubmit}
                 >
-                    <label>Date Worked</label>
+                    <label className="block mb-1 font-semibold">Date Worked</label>
                     <input
                         type="date"
-                        name="date"
+                        name="work_date"
                         className="w-full p-3 border border-gray-300 rounded-lg mb-4"
                         required
                     />
-                    <label>Hours Worked</label>
+
+                    <label className="block mb-1 font-semibold">Hours Worked</label>
                     <input
                         type="number"
-                        name="hoursWorked"
+                        name="hours_worked"
                         className="w-full p-3 border border-gray-300 rounded-lg mb-4"
                         min="0"
                         step="0.1"
@@ -56,13 +68,13 @@ export default function NewEntry() {
                         required
                     />
 
-                    <label>Description</label>
+                    <label className="block mb-1 font-semibold">Description</label>
                     <textarea
                         name="description"
                         className="w-full p-3 border border-gray-300 rounded-lg mb-4"
                         rows={4}
                         required
-                         placeholder="What heroic deeds did you accomplish today?"
+                        placeholder="What heroic deeds did you accomplish today?"
                     ></textarea>
 
                     <button

@@ -3,10 +3,11 @@ import { getWorkEntries } from "../../lib/data";
 
 import { getUserId } from "@/app/api/auth/getUserNameServerAction";
 import { Delete, Edit } from "lucide-react";
+import DeleteEntryButton from "@/app/components/deleteEntryButton";
 
 export default async function History() {
-    const user = await getUserId();
-    const result: workEntry[] = user?.userId ? await getWorkEntries(user.userId) : [];
+    const user_id = await getUserId();
+    const result: workEntry[] = user_id !== null ? await getWorkEntries(user_id) : [];
 
     return (
         <div className="min-h-screen bg-gray-100 p-6">
@@ -17,43 +18,29 @@ export default async function History() {
                             {/* <th className="px-6 py-4"></th> */}
                             <th className="px-6 py-4">ID</th>
                             <th className="px-6 py-4">Date</th>
-                            <th className="px-6 py-4">Description</th>
                             <th className="px-6 py-4">Hours Worked</th>
+                            <th className="px-6 py-4">Description</th>
                             <th className="px-6 py-4">Actions</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
                         {result.length > 0 ? (
                             result.map((entry, index) => (
                                 <tr
-                                    key={entry.entry_id}
-                                    className={index % 2 === 0 ? "bg-gray-100 hover:bg-gray-200" : "bg-gray-200 hover:bg-gray-300"}
+                                    key={entry.id}
+                                    className={`group ${index % 2 === 0 ? "bg-gray-100 hover:bg-gray-300" : "bg-gray-200 hover:bg-gray-300"}`}
                                 >
+                                    <td className="px-6 py-4">{entry.id}</td>
+                                    <td className="px-6 py-4">{new Date(entry.work_date).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4">{entry.hours_worked}</td>
+                                    <td className="px-6 py-4">{entry.description.toString()}</td>
 
-                                    {/* <td className="px-6 py-4 "><input type="checkbox"></input></td> */}
-                                    <td className="px-6 py-4">{entry.entry_id}</td>
-                                    <td className="px-6 py-4">{new Date(entry.hours).toLocaleDateString()}</td>
-                                    <td className="px-6 py-4 ">{entry.description.toString()}</td>
-                                    <td className="px-6 py-4">{entry.hours}</td>
-
-                                    <td className=" flex px-6 py-4 space-x-2 ">
-                                        <Edit/><Delete/>
-                                        {/* <button
-
-                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-xs"
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-
-                                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs"
-                                        >
-                                            Delete
-                                        </button> */}
+                                    <td className="px-6 py-4 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                        <DeleteEntryButton entry_id={entry.id} />
                                     </td>
-
                                 </tr>
+
                             ))
                         ) : (
                             <tr>

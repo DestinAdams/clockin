@@ -1,13 +1,14 @@
 export type user = {
     id: number;
     name: string;
-    value: number;
+    role: string;
+    // value: number;
 }
 
 export type workEntry = {
-    entry_id: number
-    user_id: string;
+    id: number;
+    user_id: number;
     work_date: Date;
-    description: Text;
-    hours: number;
+    description: string;
+    hours_worked: number;
 }

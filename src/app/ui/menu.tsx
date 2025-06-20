@@ -51,14 +51,12 @@ export default function Menu() {
                             className="w-10 h-10 rounded-full border-2 border-black mb-1"
                         />
                         <span className="text-sm text-gray-700 font-medium text-center">
-                            {username ? (
                                 <>
                                     Welcome back,<br />
                                     {username}
+                                    {userRole && <span className="flex flex-col center text-xs text-blue-500"> ({userRole})</span>}
+
                                 </>
-                            ) : (
-                                "Welcome back"
-                            )}
                         </span>
                         <ChevronDown
                             className={`h-4 w-4 text-gray-500 mt-1 transition-transform ${menuOpen ? "rotate-180" : ""
