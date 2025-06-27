@@ -1,9 +1,8 @@
 import type { workEntry } from "../../lib/definitions";
 import { getWorkEntries } from "../../lib/data";
-
 import { getUserId } from "@/app/api/auth/getUserNameServerAction";
-import { Delete, Edit } from "lucide-react";
 import DeleteEntryButton from "@/app/components/deleteEntryButton";
+import EditEntryButton from "@/app/components/editEntryButton";
 
 export default async function History() {
     const user_id = await getUserId();
@@ -36,7 +35,8 @@ export default async function History() {
                                     <td className="px-6 py-4">{entry.hours_worked}</td>
                                     <td className="px-6 py-4">{entry.description.toString()}</td>
 
-                                    <td className="px-6 py-4 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <td className="px-6 py-4 flex flex-row  space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                        <EditEntryButton entry_id={entry.id} />
                                         <DeleteEntryButton entry_id={entry.id} />
                                     </td>
                                 </tr>

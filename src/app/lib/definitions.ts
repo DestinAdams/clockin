@@ -2,7 +2,9 @@ export type user = {
     id: number;
     name: string;
     role: string;
-    // value: number;
+    email: string;
+    phoneNumber: string;
+    location: string;
 }
 
 export type workEntry = {

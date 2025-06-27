@@ -13,19 +13,23 @@ export default function DeleteEntryButton({ entry_id }: DeleteEntryButtonProps) 
     const handleDelete = async () => {
         try {
             setIsDeleting(true);
-            const res = await fetch('/api/workentry', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ entry_id }),
-            });
-            if (!res.ok) {
-                throw new Error(`Failed to delete entry ${entry_id}`);
+            const confirmed = window.confirm('Are you sure you want to delete this entry?');
+            if (confirmed) {
+                const res = await fetch('/api/workentry', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ entry_id }),
+                });
+
+
+                if (!res.ok) {
+                    throw new Error(`Failed to delete entry ${entry_id}`);
+                }
+                console.log(`Entry with ID ${entry_id} deleted`);
+
             }
-            console.log(`Entry with ID ${entry_id} deleted`);
-
-
             // Optionally trigger a refresh or re-fetch entries
             router.refresh();
         } catch (error) {
@@ -40,7 +44,7 @@ export default function DeleteEntryButton({ entry_id }: DeleteEntryButtonProps) 
         <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className="disabled:opacity-50"
+            className="disabled:opacity-25"
         >
             <Delete className="text-red-600 hover:text-red-700" />
         </button>

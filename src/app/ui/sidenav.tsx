@@ -15,7 +15,7 @@
                     <div>
                         <div className="flex items-center justify-between p-4">
                             {!isCollapsed && (
-                                <h1 className="text-blue-600 font-bold text-lg whitespace-nowrap transition">ClockIn</h1>
+                                <h1 className="text-blue-600 font-bold text-xl whitespace-nowrap transition">ClockIn</h1>
                             )}
                             <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
