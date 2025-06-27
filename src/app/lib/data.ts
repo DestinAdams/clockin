@@ -1,4 +1,4 @@
-import { workEntry } from "../lib/definitions";
+import { user, workEntry } from "../lib/definitions";
 import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -44,3 +44,15 @@ export async function getWorkEntries(user_id: number) {
     }
 }
 
+export async function updateProfile(user_id: number, email: string, phoneNumber: string, location: string) {
+    try {
+        const result = await sql<user[]>`UPDATE users SET email = ${email}, phoneNumber = ${phoneNumber}, location = ${location} WHERE id = ${user_id}`;
+        console.log(`Profile updated successfully for user ID ${user_id}`);
+        return result;
+    } catch (error) {
+        console.error(`Failed to update profile for user ID ${user_id}:`, error);
+        throw error;
+    } finally {
+        console.log("Profile update operation completed");
+    }
+}

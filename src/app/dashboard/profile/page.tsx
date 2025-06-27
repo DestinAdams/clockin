@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { UserCircle2, Mail, Pencil } from "lucide-react";
+import { UserCircle2, Mail, Pencil, Save } from "lucide-react";
 import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 
 export default function ProfilePage() {
@@ -9,15 +9,14 @@ export default function ProfilePage() {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [location, setLocation] = useState("");
-    const [joinedDate, setJoinedDate] = useState("");
     const [role, setRole] = useState("");
     const [profileImage, setProfileImage] = useState("/profile-placeholder.png");
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const user = await getUserInfo(); // Should return user info from the DB
-
+                const user = await getUserInfo();
                 if (user) {
                     setUsername(user.name || "");
                     setProfileImage(user.image || "/profile-placeholder.png");
@@ -33,6 +32,31 @@ export default function ProfilePage() {
 
         fetchUserData();
     }, []);
+
+    const handleSubmit = async () => {
+        try {
+            const res = await fetch("/api/profileEditor", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    user_id,
+                    email,
+                    phoneNumber,
+                    location,
+                }),
+            });
+
+            if (res.ok) {
+                alert("Profile updated successfully!");
+                setIsEditing(false);
+            } else {
+                alert("Failed to update profile.");
+            }
+        } catch (err) {
+            console.error("Update error:", err);
+            console.log("An error occurred while updating the profile. Please try again later.",email, phoneNumber, location);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 py-10 px-4">
@@ -54,41 +78,78 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                    {/* Email */}
                     <div>
                         <label className="text-sm text-gray-600">Email</label>
-                        <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800 flex items-center gap-2">
-                            <Mail className="w-4 h-4 text-gray-500" />
-                            {email || "N/A"}
-                        </div>
+                        {isEditing ? (
+                            <input
+                                className="mt-1 p-2 w-full border rounded"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        ) : (
+                            <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800 flex items-center gap-2">
+                                <Mail className="w-4 h-4 text-gray-500" />
+                                {email || "N/A"}
+                            </div>
+                        )}
                     </div>
 
+                    {/* Phone */}
                     <div>
                         <label className="text-sm text-gray-600">Phone</label>
-                        <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800">
-                            {phoneNumber || "Not provided"}
-                        </div>
+                        {isEditing ? (
+                            <input
+                                className="mt-1 p-2 w-full border rounded"
+                                type="text"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                        ) : (
+                            <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800">
+                                {phoneNumber || "Not provided"}
+                            </div>
+                        )}
                     </div>
 
+                    {/* Location */}
                     <div>
                         <label className="text-sm text-gray-600">Location</label>
-                        <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800">
-                            {location || "Unknown"}
-                        </div>
-                    </div>
-
-                    <div>
-                        <label className="text-sm text-gray-600">Joined</label>
-                        <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800">
-                            {joinedDate ? new Date(joinedDate).toLocaleDateString() : "Unknown"}
-                        </div>
+                        {isEditing ? (
+                            <input
+                                className="mt-1 p-2 w-full border rounded"
+                                type="text"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                            />
+                        ) : (
+                            <div className="mt-1 p-2 bg-gray-100 rounded text-gray-800">
+                                {location || "Unknown"}
+                            </div>
+                        )}
                     </div>
                 </div>
 
+                {/* Buttons */}
                 <div className="flex justify-end">
-                    <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
-                        <Pencil className="w-4 h-4" />
-                        Edit Profile
-                    </button>
+                    {isEditing ? (
+                        <button
+                            onClick={handleSubmit}
+                            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow"
+                        >
+                            <Save className="w-4 h-4" />
+                            Save Changes
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
+                        >
+                            <Pencil className="w-4 h-4" />
+                            Edit Profile
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
