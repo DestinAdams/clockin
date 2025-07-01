@@ -9,21 +9,31 @@ export const ContactUs = () => {
     const [success, setSuccess] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const sendEmail = (e) => {
+    interface EmailFormElements extends HTMLFormControlsCollection {
+        user_name: HTMLInputElement;
+        user_email: HTMLInputElement;
+        message: HTMLTextAreaElement;
+    }
+
+    interface EmailForm extends HTMLFormElement {
+        elements: EmailFormElements;
+    }
+
+    const sendEmail = (e: React.FormEvent<EmailForm>) => {
         e.preventDefault();
         setLoading(true);
         setSuccess('');
         setErrorMsg('');
 
         emailjs
-            .sendForm('service_nx5uosp', 'template_7hm4dvr', form.current, {
+            .sendForm('service_nx5uosp', 'template_7hm4dvr', form.current as EmailForm, {
                 publicKey: 'UT4aP9Zlamoku6BqS',
             })
             .then(() => {
                 setSuccess('Your message has been sent successfully!');
-                form.current.reset();
+                form.current?.reset();
             })
-            .catch((error) => {
+            .catch((error: { text: string }) => {
                 console.error('FAILED...', error.text);
                 setErrorMsg('Failed to send message. Please try again.');
             })
