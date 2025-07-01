@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { getUserInfo } from "../api/auth/getUserNameServerAction";
-import { ChevronDown, LogOut, User, UserCircle2 } from "lucide-react";
+import { ChevronDown, HelpCircle, LogOut, User, UserCircle2 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
@@ -85,6 +85,13 @@ export default function Menu() {
 
                                     </li>
                                 </Link>
+                                <Link href="/dashboard/help">
+                                    <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+                                        <HelpCircle className="w-4 h-4" />
+                                        <span>Help</span>
+                                    </li>
+                                </Link>
+                                {/* signOutButton */}
                                 <li
                                     onClick={() => signOut({ callbackUrl: "/" })}
                                     className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
@@ -92,6 +99,7 @@ export default function Menu() {
                                     <LogOut className="w-4 h-4" />
                                     <span>Logout</span>
                                 </li>
+
                             </ul>
                         </div>
                     )}

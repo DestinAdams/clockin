@@ -19,6 +19,7 @@ export default async function History() {
                             <th className="px-6 py-4">Date</th>
                             <th className="px-6 py-4">Hours Worked</th>
                             <th className="px-6 py-4">Description</th>
+                            <th className="px-6 py-4">Approval</th>
                             <th className="px-6 py-4">Actions</th>
 
                         </tr>
@@ -34,8 +35,8 @@ export default async function History() {
                                     <td className="px-6 py-4">{new Date(entry.work_date).toLocaleDateString()}</td>
                                     <td className="px-6 py-4">{entry.hours_worked}</td>
                                     <td className="px-6 py-4">{entry.description.toString()}</td>
-
-                                    <td className="px-6 py-4 flex flex-row  space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <td className="px-6 py-4">approved</td>
+                                    <td className="px-6 py-6 flex flex-row  space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                         <EditEntryButton entry_id={entry.id} />
                                         <DeleteEntryButton entry_id={entry.id} />
                                     </td>

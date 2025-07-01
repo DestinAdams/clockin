@@ -4,7 +4,7 @@ import postgres from "postgres";
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 
-
+//CREATORS-ADDERS
 export async function addWorkEntry(user_id: number, work_date: Date, description: string, hours_worked: number) {
     try {
         const data = await sql<workEntry[]>`INSERT INTO workentries (user_id, work_date,description, hours_worked) VALUES (${user_id},${work_date},${description},${hours_worked})`;
@@ -16,6 +16,7 @@ export async function addWorkEntry(user_id: number, work_date: Date, description
         console.log("Work entry operation completed");
     }
 }
+//DELETERS
 export async function deleteWorkEntry(entry_id: number) {
     try {
         const result = await sql`DELETE FROM workentries WHERE id = ${entry_id}`;
@@ -29,7 +30,7 @@ export async function deleteWorkEntry(entry_id: number) {
     }
 }
 
-
+//GETTERS
 export async function getWorkEntries(user_id: number) {
     try {
         const entries = await sql<workEntry[]>`SELECT id, work_date, description, hours_worked FROM workEntries WHERE user_id = ${user_id}`;
@@ -44,6 +45,7 @@ export async function getWorkEntries(user_id: number) {
     }
 }
 
+//UPDATERS
 export async function updateProfile(user_id: number, email: string, phoneNumber: string, location: string) {
     try {
         const result = await sql<user[]>`UPDATE users SET email = ${email}, phoneNumber = ${phoneNumber}, location = ${location} WHERE id = ${user_id}`;
