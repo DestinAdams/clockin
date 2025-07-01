@@ -8,12 +8,13 @@ export const  getUserInfo = async () => {
     if (session) {
 
         return {
+            
             name: session.user?.name,
             image: session.user?.image,
-            role: session.user?.role, 
+            // role: session.user?.role, 
             email: session.user?.email,
-            phoneNumber: session.user?.phoneNumber,
-            location: session.user?.location,
+            // phoneNumber: session.user?.phoneNumber,
+            // location: session.user?.location,
             
             
         };
