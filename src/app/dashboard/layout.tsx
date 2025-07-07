@@ -1,12 +1,29 @@
 import SideNav from '@/app/ui/sidenav';
 import Menu from '@/app/ui/menu';
+import { getUserInfo } from '../api/auth/getUserNameServerAction';
+import AdminSideNav from '@/app/ui/AdminSideNav';
+// import AccountantSideNav from '@/app/ui/sidenav/accountantSideNav';
+import WorkerSideNav from '@/app/ui/WorkerSideNav';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+    const user = await getUserInfo();
+    const renderSideNav = () => {
+
+        switch (user.role) {
+            case 'admin':
+                return <AdminSideNav />;
+            // case 'accountant':
+            //     return <AccountantSideNav />;
+            default:
+                return <WorkerSideNav />;
+        }
+    };
     return (
         <div className="flex h-screen w-screen overflow-hidden">
             {/* Sidebar on the left */}
             <aside className="flex-shrink-0 bg-white border-r shadow-md">
-                <SideNav />
+                {renderSideNav()}
+                
             </aside>
 
             {/* Right-side content */}

@@ -55,7 +55,7 @@ function SideNav() {
                             <CirclePlus size={20} color="black" />
                             {!isCollapsed && (
                                 <>
-                                    <span>Entries</span>
+                                    <span className="flex-grow text-left">Entries</span>
                                     {entryDropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                                 </>
                             )}
@@ -63,16 +63,16 @@ function SideNav() {
                         {!isCollapsed && entryDropdownOpen && (
                             <div className="ml-6 flex flex-col gap-1 mt-1">
                                 <Link
-                                    href="/dashboard/new-entry"
+                                    href="/dashboard/newEntry"
                                     className="text-sm text-gray-600 hover:text-blue-600 hover:underline"
                                 >
                                     New Entry
                                 </Link>
                                 <Link
-                                    href="/dashboard/entry-list"
+                                    href="/dashboard/myEntries"
                                     className="text-sm text-gray-600 hover:text-blue-600 hover:underline"
                                 >
-                                    Entry List
+                                    My Entries
                                 </Link>
                             </div>
                         )}
@@ -85,7 +85,7 @@ function SideNav() {
                             <Calendar size={20} color="black" />
                             {!isCollapsed && (
                                 <>
-                                    <span>Time Sheets</span>
+                                    <span className="flex-grow text-left">Time Sheets</span>
                                     {timeSheetDropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                                 </>
                             )}
@@ -99,21 +99,14 @@ function SideNav() {
                                     View Time Sheets
                                 </Link>
                                 <Link
-                                    href="/dashboard/timeSheet/new"
+                                    href="/dashboard/newTimeSheet"
                                     className="text-sm text-gray-600 hover:text-blue-600 hover:underline"
                                 >
-                                    New Time Sheet
+                                    Submit Timesheet
                                 </Link>
                             </div>
                         )}
 
-                        <Link
-                            href="/dashboard/history"
-                            className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
-                        >
-                            <History size={20} color="black" />
-                            {!isCollapsed && <span>History</span>}
-                        </Link>
 
                         <Link
                             href="/dashboard/export"

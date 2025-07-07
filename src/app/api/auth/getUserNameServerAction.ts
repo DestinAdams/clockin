@@ -4,17 +4,18 @@ import { auth } from "@/auth"
 
 export const getUserInfo = async () => {
     const session = await auth();
-
+    session?.user
     if (session) {
 
         return {
-
+            //believe this is only connected tohe auth session, not the database
+            // so it will need to be implemented by calling from the database
             name: session.user?.name,
             image: session.user?.image,
-            // role: session.user?.role, 
+            role: session.user?.role, 
             email: session.user?.email,
-            // phoneNumber: session.user?.phoneNumber,
-            // location: session.user?.location,
+            phoneNumber: session.user?.phoneNumber,
+            location: session.user?.location,
 
 
         };

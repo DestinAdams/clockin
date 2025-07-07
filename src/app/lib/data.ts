@@ -1,4 +1,4 @@
-import { user, workEntry } from "../lib/definitions";
+import { timeSheet, user, workEntry } from "../lib/definitions";
 import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -42,6 +42,19 @@ export async function getWorkEntries(user_id: number) {
         throw error;
     } finally {
         console.log("Data fetched successfully");
+    }
+}
+
+export async function getTimeSheets(user_id: number) {
+    try {
+        const timeSheets = await sql<timeSheet[]>`SELECT id, start_date, end_date, status, total_hours FROM "timeSheets" WHERE user_id = ${user_id}`;
+        console.log("Time sheets fetched successfully:", timeSheets);
+        return timeSheets;
+    } catch (error) {
+        console.error("Error fetching time sheets:", error);
+        throw error;
+    } finally {
+        console.log("Time sheets fetched successfully");
     }
 }
 
