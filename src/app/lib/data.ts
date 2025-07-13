@@ -16,6 +16,34 @@ export async function addWorkEntry(user_id: number, work_date: Date, description
         console.log("Work entry operation completed");
     }
 }
+export async function addTimeSheet(user_id: number, start_date: Date, end_date: Date, status: string) {
+    try {
+        // 1. Get the total hours from workEntries in the date range
+        const result = await sql<{ total: number }[]>`
+            SELECT SUM(hours_worked) AS total
+            FROM workEntries
+            WHERE user_id = ${user_id}
+              AND work_date >= ${start_date}
+              AND work_date <= ${end_date};
+        `;
+
+        const total_hours = result[0]?.total ?? 0;
+        console.log(`Total hours calculated: ${total_hours}`);
+        // 2. Insert into timeSheets
+        const data = await sql`
+            INSERT INTO "timeSheets"(user_id, start_date, end_date, status, total_hours)
+            VALUES (${user_id}, ${start_date}, ${end_date}, ${status}, ${total_hours});
+        `;
+
+        return data;
+    } catch (error) {
+        console.error("Error adding time sheet:", error);
+        throw error;
+    } finally {
+        console.log("Time sheet operation completed");
+    }
+}
+
 //DELETERS
 export async function deleteWorkEntry(entry_id: number) {
     try {
