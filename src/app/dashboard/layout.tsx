@@ -2,7 +2,7 @@ import SideNav from '@/app/ui/sidenav';
 import Menu from '@/app/ui/menu';
 import { getUserInfo } from '../api/auth/getUserNameServerAction';
 import AdminSideNav from '@/app/ui/AdminSideNav';
-// import AccountantSideNav from '@/app/ui/sidenav/accountantSideNav';
+import AccountantSideNav from '@/app/ui/AccountantSideNav';
 import WorkerSideNav from '@/app/ui/WorkerSideNav';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
@@ -12,8 +12,8 @@ export default async function Layout({ children }: { children: React.ReactNode }
         switch (user.role) {
             case 'admin':
                 return <AdminSideNav />;
-            // case 'accountant':
-            //     return <AccountantSideNav />;
+            case 'accountent':
+                return <AccountantSideNav />;
             default:
                 return <WorkerSideNav />;
         }

@@ -31,7 +31,7 @@ export default async function History() {
                                     className={`group ${index % 2 === 0 ? "bg-gray-100 hover:bg-gray-300" : "bg-gray-200 hover:bg-gray-300"}`}
                                 >
                                     <td className="px-6 py-4">{entry.id}</td>
-                                    <td className="px-6 py-4">{new Date(entry.work_date).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4">{new Date(entry.work_date).toLocaleDateString("en-US", { timeZone: "UTC" })}</td>
                                     <td className="px-6 py-4">{entry.hours_worked}</td>
                                     <td className="px-6 py-4">{entry.description.toString()}</td>
                                     <td className="px-6 py-6 flex flex-row  space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
