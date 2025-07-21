@@ -1,10 +1,11 @@
-import { getUserId } from "@/app/api/auth/getUserNameServerAction";
+import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 import { timeSheet } from "@/app/lib/definitions";
 import { getTimeSheets } from "@/app/lib/data"; // Placeholder for timesheet data fetching function
+import { Download, Focus, View } from "lucide-react";
 
 export default async function TimeSheetPage() {
-    const user_id = await getUserId(); // just gets the user id of the logged in user
-    const result: timeSheet[] = user_id !== null ? await getTimeSheets(user_id) : [];  // Placeholder for timesheet data, replace with actual data fetching logic
+    const user_id = await getUserInfo() ; // just gets the user id of the logged in user
+    const result: timeSheet[] = user_id?.id !== null && user_id?.id !== undefined ? await getTimeSheets(user_id.id) : [];  // Ensure user_id.id is not null or undefined before calling getTimeSheets
     // You would typically fetch the timesheet data here based on the user_id
     // For example: const result = await getTimeSheets(user_id);
     return (
@@ -18,12 +19,12 @@ export default async function TimeSheetPage() {
                     <thead className="bg-blue-600 text-white text-left ">
                         <tr>
                             {/* <th className="px-6 py-4"></th> */}
-                            <th className="px-6 py-4 ">id</th>
-                            <th className="px-6 py-4">start-date</th>
-                            <th className="px-6 py-4">end-date</th>
-                            <th className="px-6 py-4">status</th>
-                            <th className="px-6 py-4">total hours</th>
-                            {/* <th className="px-6 py-4">work entries array</th> */}
+                            <th className="px-6 py-4 text-center">id</th>
+                            <th className="px-6 py-4 text-center">start-date</th>
+                            <th className="px-6 py-4 text-center">end-date</th>
+                            <th className="px-6 py-4 text-center">status</th>
+                            <th className="px-6 py-4 text-center">total hours</th>
+                            {/* <th className="px-6 py-4">actions</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -32,11 +33,12 @@ export default async function TimeSheetPage() {
                                 <tr
                                     key={entry.id}
                                     className={`group ${index % 2 === 0 ? "bg-gray-100 hover:bg-gray-300" : "bg-gray-200 hover:bg-gray-300"}`}
+                                    
                                 >
-                                    <td className="px-6 py-4">{entry.id}</td>
-                                    <td className="px-6 py-4">{new Date(entry.start_date).toLocaleDateString()}</td>
-                                    <td className="px-6 py-4">{new Date(entry.end_date).toLocaleDateString()}</td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-6 py-4 text-center">{entry.id}</td>
+                                    <td className="px-6 py-4 text-center">{new Date(entry.start_date).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 text-center">{new Date(entry.end_date).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 text-center">
                                         <span
                                             className={`px-3 py-1 rounded-full text-xs font-semibold 
       ${entry.status === "Approved"
@@ -51,7 +53,8 @@ export default async function TimeSheetPage() {
                                             {entry.status}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 ">{entry.total_hours}</td>
+                                    <td className="px-6 py-4 text-center">{entry.total_hours}</td>
+                                    {/* In future want a export button */}
                                 </tr>
 
                             ))

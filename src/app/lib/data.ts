@@ -86,6 +86,30 @@ export async function getTimeSheets(user_id: number) {
     }
 }
 
+export async function getExportTimeSheet(user_id: number, start_date: Date, end_date: Date){
+    try {
+        const exportTimeSheets = await sql<timeSheet[]>`
+            SELECT id, start_date, end_date, total_hours
+            FROM "timeSheets"
+            WHERE user_id = ${user_id}
+              AND start_date >= ${start_date}
+              AND end_date <= ${end_date};
+        `;
+        console.log("Export TimeSheets fetched successfully:", exportTimeSheets);
+        return exportTimeSheets;
+
+    } catch (error) {
+        console.error("Error fetching time sheets:", error);
+        throw error;
+    } finally {
+        console.log("Export TimeSheets fetched successfully");
+    }
+}
+export async function getUserInfo(user_id: number) {
+    return sql<user[]>
+}
+
+
 //UPDATERS
 export async function updateProfile(user_id: number, email: string, phoneNumber: string, location: string) {
     try {

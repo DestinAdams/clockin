@@ -39,7 +39,7 @@ export default function ProfilePage() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    user_id,
+                    
                     email,
                     phoneNumber,
                     location,
@@ -153,5 +153,5 @@ export default function ProfilePage() {
                 </div>
             </div>
         </div>
-    );
+    );  
 }

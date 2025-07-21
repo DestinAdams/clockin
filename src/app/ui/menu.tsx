@@ -23,11 +23,11 @@ export default function Menu() {
                 } else {
                     setProfileImage("/profile-placeholder.png");
                 }
-
-                if (user.role) setUserRole(user.role);
+    
+                setUserRole(user.role ?? ""); // ✅ <-- THIS LINE: always set the role
             }
         })();
-    }, []);
+    }, [])
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {

@@ -1,12 +1,12 @@
 import type { workEntry } from "../../lib/definitions";
 import { getWorkEntries } from "../../lib/data";
-import { getUserId } from "@/app/api/auth/getUserNameServerAction";
+import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 import DeleteEntryButton from "@/app/components/deleteEntryButton";
 import EditEntryButton from "@/app/components/editEntryButton";
 
 export default async function History() {
-    const user_id = await getUserId();
-    const result: workEntry[] = user_id !== null ? await getWorkEntries(user_id) : [];
+    const user = await getUserInfo();
+    const result: workEntry[] = user?.id !== null && user?.id !== undefined ? await getWorkEntries(user.id as number) : [];
 
     return (
         <div className="min-h-screen bg-gray-100 p-6">
@@ -35,7 +35,7 @@ export default async function History() {
                                     <td className="px-6 py-4">{entry.hours_worked}</td>
                                     <td className="px-6 py-4">{entry.description.toString()}</td>
                                     <td className="px-6 py-6 flex flex-row  space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                    <EditEntryButton entry={entry} />
+                                        <EditEntryButton entry={entry} />
 
                                         <DeleteEntryButton entry_id={entry.id} />
                                     </td>

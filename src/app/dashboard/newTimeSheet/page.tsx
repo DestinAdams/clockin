@@ -1,5 +1,5 @@
 'use client';
-import { getUserId } from "@/app/api/auth/getUserNameServerAction";
+import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 import { useState } from "react";
 
 export default function NewTimeSheet() {
@@ -9,14 +9,14 @@ export default function NewTimeSheet() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const user_id = await getUserId() as number;
-            console.log("User ID:", user_id);
-            if (!user_id) throw new Error("User ID is null. Please ensure you are logged in.");
+            const user = await getUserInfo();
+            console.log("User ID:", user?.id);
+            if (!user?.id) throw new Error("User ID is null. Please ensure you are logged in.");
 
             const response = await fetch('/api/timesheet', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id, start_date: startDate, end_date: endDate }),
+                body: JSON.stringify({ user: user.id, start_date: startDate, end_date: endDate }),
             });
 
             if (!response.ok) throw new Error("Failed to create timesheet, bad API request");
