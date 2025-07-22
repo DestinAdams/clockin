@@ -1,15 +1,15 @@
 'use client';
-import { getUserId } from "@/app/api/auth/getUserNameServerAction";
+import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 export default function NewEntry() {
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
 
         try {
-            const user_id = await getUserId() as number;
+            const user = await getUserInfo();
 
-            if (!user_id) throw new Error("User ID is null. Please ensure you are logged in.");
-
+            if (!user?.id) throw new Error("User ID is null. Please ensure you are logged in.");
+            const id = user.id as number;
             const work_date = new Date(formData.get('work_date') as string);
             const hours_worked = parseFloat(formData.get('hours_worked') as string);
 
@@ -19,12 +19,12 @@ export default function NewEntry() {
             const response = await fetch('/api/workentry', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id, work_date, description, hours_worked }),
+                body: JSON.stringify({ id, work_date, description, hours_worked }),
             });
             if (!response.ok) throw new Error("Failed to submit work entry, bad api request");
 
             console.log("Submitting entry:", {
-                user_id,
+                id,
                 work_date,
                 description,
                 hours_worked,

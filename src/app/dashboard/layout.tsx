@@ -8,8 +8,8 @@ import WorkerSideNav from '@/app/ui/WorkerSideNav';
 export default async function Layout({ children }: { children: React.ReactNode }) {
     const user = await getUserInfo();
     const renderSideNav = () => {
-
-        switch (user.role) {
+        
+        switch (user?.role) {
             case 'admin':
                 return <AdminSideNav />;
             case 'accountent':

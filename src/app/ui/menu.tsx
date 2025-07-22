@@ -24,7 +24,7 @@ export default function Menu() {
                     setProfileImage("/profile-placeholder.png");
                 }
     
-                setUserRole(user.role ?? ""); // ✅ <-- THIS LINE: always set the role
+                setUserRole(user.role ?? ""); 
             }
         })();
     }, [])
