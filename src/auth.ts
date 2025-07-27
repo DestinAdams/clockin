@@ -1,26 +1,21 @@
+// auth.ts
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import NeonAdapter from "@auth/neon-adapter";
 import { Pool } from "@neondatabase/serverless";
 
-export const { handlers, auth, signIn, signOut } = NextAuth(() => {
-  const { DATABASE_URL, AUTH_GOOGLE_ID, AUTH_GOOGLE_SECRET } = process.env;
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
-  if (!DATABASE_URL || !AUTH_GOOGLE_ID || !AUTH_GOOGLE_SECRET) {
-    throw new Error("Missing required env vars");
-  }
-
-  const pool = new Pool({ connectionString: DATABASE_URL });
-
-  return {
-    adapter: NeonAdapter(pool), 
-    providers: [
-      Google({
-        clientId: AUTH_GOOGLE_ID,
-        clientSecret: AUTH_GOOGLE_SECRET,
-        checks: [], // optional strict enforcement
-      }),
-    ],
-    debug: false,
-  };
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  adapter: NeonAdapter(pool),
+  providers: [
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+    }),
+  ],
+  session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
 });
