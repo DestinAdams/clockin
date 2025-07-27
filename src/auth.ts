@@ -13,12 +13,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: DATABASE_URL });
 
   return {
-    adapter: NeonAdapter(pool),
+    adapter: NeonAdapter(pool), 
     providers: [
       Google({
         clientId: AUTH_GOOGLE_ID,
         clientSecret: AUTH_GOOGLE_SECRET,
-        // checks: ["pkce"], // optional strict enforcement
+        checks: ["pkce"], // optional strict enforcement
       }),
     ],
     debug: true,
