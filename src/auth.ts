@@ -18,9 +18,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
       Google({
         clientId: AUTH_GOOGLE_ID,
         clientSecret: AUTH_GOOGLE_SECRET,
-        checks: ["pkce"], // optional strict enforcement
+        checks: [], // optional strict enforcement
       }),
     ],
-    debug: true,
+    debug: false,
   };
 });
