@@ -1,16 +1,15 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const {
-  handlers, // this provides GET and POST
-  auth,
-  signIn,
-  signOut
-} = NextAuth({
+const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
+  // You can add callbacks, pages, etc., here
 });
+
+export const runtime = "nodejs"; // required for PKCE
+export { handler as GET, handler as POST };
