@@ -1,3 +1,16 @@
-import { handlers } from "@/auth";
-export const runtime = "nodejs"; // required for Google + PKCE
-export const { GET, POST } = handlers;
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+
+export const {
+  handlers, // this provides GET and POST
+  auth,
+  signIn,
+  signOut
+} = NextAuth({
+  providers: [
+    GoogleProvider({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+    }),
+  ],
+});
