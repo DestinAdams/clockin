@@ -18,7 +18,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
   cookies:{
     pkceCodeVerifier:{
-      name  : "__Secure-next-auth.pkce.code_verifier",
+      name  : "next-auth.pkce.code_verifier",
       options: {
         httpOnly: true,
         sameSite: "none",
