@@ -16,4 +16,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   adapter: NeonAdapter(pool),
   secret: process.env.AUTH_SECRET,
+  cookies:{
+    pkceCodeVerifier:{
+      name  : "__Secure-next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: true, 
+    },
+  },
+},
 })
