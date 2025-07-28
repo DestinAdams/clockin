@@ -22,7 +22,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       options: {
         httpOnly: true,
         sameSite: "none",
-        path: "/",
+        path: "https://clockin-g395cq4se-destinadams-projects.vercel.app/api/auth/callback/google",
         secure: true, 
     },
   },
