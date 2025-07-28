@@ -16,15 +16,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   adapter: NeonAdapter(pool),
   secret: process.env.AUTH_SECRET,
-  cookies:{
-    pkceCodeVerifier:{
-      name  : "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "none",
-        path: "https://clockin-g395cq4se-destinadams-projects.vercel.app/api/auth/callback/google",
-        secure: true, 
-    },
-  },
-},
+//   cookies:{
+//     pkceCodeVerifier:{
+//       name  : "next-auth.pkce.code_verifier",
+//       options: {
+//         httpOnly: true,
+//         sameSite: "none",
+//         path: "/",
+//         secure: true, 
+//     },
+//   },
+// },
 })
