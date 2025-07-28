@@ -4,26 +4,6 @@ import { auth } from "@/auth"
 import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
-// export const getUserInfo = async () => {
-//     const session = await auth();
-
-//     if (session) {
-
-//         return {
-//             //believe this is only connected tohe auth session, not the database
-//             // so it will need to be implemented by calling from the database
-            
-//             id: session.user?.id ? Number(session.user.id) : null, // safely convert to number
-//             name: session.user?.name,
-//             image: session.user?.image,
-//             role: null,
-//             email: session.user?.email,
-//             phoneNumber: null,
-//             location: null,
-//         };
-//     }
-//     return null;
-// }
 
 export const getUserInfo = async () => {
     const session = await auth();
