@@ -14,17 +14,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
-  adapter: NeonAdapter(pool),
+  
   secret: process.env.AUTH_SECRET,
-//   cookies:{
-//     pkceCodeVerifier:{
-//       name  : "next-auth.pkce.code_verifier",
-//       options: {
-//         httpOnly: true,
-//         sameSite: "none",
-//         path: "/",
-//         secure: true, 
-//     },
-//   },
-// },
+  // Uncomment and complete this block if needed
+  // cookies: {
+  //   pkceCodeVerifier: {
+  //     name: "next-auth.pkce.code_verifier",
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: "none",
+  //       path: "/",
+  //     },
+  //   },
+  // },
 })
