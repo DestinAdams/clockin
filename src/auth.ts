@@ -21,7 +21,7 @@ import { Pool } from "@neondatabase/serverless"
 export const { handlers, signIn, signOut, auth } = NextAuth( ()=> {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL })
   return{
-    adapter: NeonAdapter(pool),
+    adapter: NeonAdapter(pool as any),
     providers:[Google]
   }
 
