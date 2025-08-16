@@ -13,17 +13,36 @@
 //   }
 // })
 
+// import NextAuth from "next-auth"
+// import Google from "next-auth/providers/google"
+// import NeonAdapter from "@auth/neon-adapter"
+// import { Pool } from "@neondatabase/serverless" 
+
+// export const { handlers, signIn, signOut, auth } = NextAuth( ()=> {
+//   const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+//   return{
+//     adapter: NeonAdapter(pool as any),
+//     providers:[Google]
+//   }
+
+
+// })
+// auth.ts
+
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
-import NeonAdapter from "@auth/neon-adapter"
-import { Pool } from "@neondatabase/serverless" 
+import { NeonAdapter } from "@auth/neon-adapter"
+import { Pool } from "@neondatabase/serverless"
 
-export const { handlers, signIn, signOut, auth } = NextAuth( ()=> {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL })
-  return{
-    adapter: NeonAdapter(pool as any),
-    providers:[Google]
-  }
+const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 
-
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: NeonAdapter(pool),
+  providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  ],
+  secret: process.env.NEXTAUTH_SECRET,
 })
