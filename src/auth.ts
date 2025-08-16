@@ -1,30 +1,29 @@
-// src/auth.ts
+// import NextAuth from "next-auth"
+// import NeonAdapter from "@auth/neon-adapter"
+// import { Pool } from "@neondatabase/serverless"
+ 
+// // *DO NOT* create a `Pool` here, outside the request handler.
+ 
+// export const { handlers, auth, signIn, signOut } = NextAuth(() => {
+//   // Create a `Pool` inside the request handler.
+//   const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+//   return {
+//     adapter: NeonAdapter(pool),
+//     providers: [],
+//   }
+// })
 
 import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import  NeonAdapter  from "@auth/neon-adapter"
-import { Pool } from "@neondatabase/serverless"
+import Google from "next-auth/providers/google"
+import NeonAdapter from "@auth/neon-adapter"
+import { Pool } from "@neondatabase/serverless" 
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+export const { handlers, signIn, signOut, auth } = NextAuth( ()=> {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+  return{
+    adapter: NeonAdapter(pool),
+    providers:[Google]
+  }
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-    }),
-  ],
-  
-  secret: process.env.AUTH_SECRET,
-  // Uncomment and complete this block if needed
-  // cookies: {
-  //   pkceCodeVerifier: {
-  //     name: "next-auth.pkce.code_verifier",
-  //     options: {
-  //       httpOnly: true,
-  //       sameSite: "none",
-  //       path: "/",
-  //     },
-  //   },
-  // },
+
 })
