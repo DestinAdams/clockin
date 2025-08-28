@@ -77,44 +77,15 @@ function SideNav() {
                             </div>
                         )}
 
-                        {/* Time Sheets Dropdown */}
-                        <button
-                            onClick={() => setTimeSheetDropdownOpen(!timeSheetDropdownOpen)}
-                            className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 w-full text-left"
-                        >
-                            <Calendar size={20} color="black" />
-                            {!isCollapsed && (
-                                <>
-                                    <span className="flex-grow text-left">Time Sheets</span>
-                                    {timeSheetDropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                                </>
-                            )}
-                        </button>
-                        {!isCollapsed && timeSheetDropdownOpen && (
-                            <div className="ml-6 flex flex-col gap-1 mt-1">
-                                <Link
-                                    href="/dashboard/timeSheet"
-                                    className="text-sm text-gray-600 hover:text-blue-600 hover:underline"
-                                >
-                                    View Time Sheets
-                                </Link>
-                                <Link
-                                    href="/dashboard/newTimeSheet"
-                                    className="text-sm text-gray-600 hover:text-blue-600 hover:underline"
-                                >
-                                    Submit Timesheet
-                                </Link>
-                            </div>
-                        )}
+                        {/* Time Sheets link (normal button, like Dashboard) */}
+<Link
+  href="/dashboard/timeSheet"
+  className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
+>
+  <Calendar size={20} color="black" />
+  {!isCollapsed && <span>Time Sheets</span>}
+</Link>
 
-
-                        <Link
-                            href="/dashboard/export"
-                            className="flex items-center gap-2 p-1 rounded hover:bg-gray-100 border text-gray-700 hover:text-blue-600"
-                        >
-                            <Download size={20} color="black" />
-                            {!isCollapsed && <span>Export</span>}
-                        </Link>
                     </ul>
                 </div>
 

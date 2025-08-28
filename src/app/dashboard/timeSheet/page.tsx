@@ -1,7 +1,13 @@
 import { getUserInfo } from "@/app/api/auth/getUserNameServerAction";
 import { timeSheet } from "@/app/lib/definitions";
 import { getTimeSheets } from "@/app/lib/data"; // Placeholder for timesheet data fetching function
-import { Download, Focus, View } from "lucide-react";
+import { Download, Eye, Focus, View, Plus } from "lucide-react";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+  } from "@/components/ui/popover"
+import NewTimeSheetSelection from "@/app/ui/newTimeSheetSelection";
 
 export default async function TimeSheetPage() {
     const user_id = await getUserInfo() ; // just gets the user id of the logged in user
@@ -10,8 +16,28 @@ export default async function TimeSheetPage() {
     // For example: const result = await getTimeSheets(user_id);
     return (
         <div className="min-h-screen bg-gray-100 p-6">
+            <div className="flex justify-between items-center max-w-6xl mx-auto mb-6">
+  <h1 className="text-2xl font-bold">Time Sheets</h1>
+  
+  <Popover>
+    <PopoverTrigger asChild>
+      <button className=" text-white shadow-lg p-2 rounded-2xl bg-blue-200 hover:bg-blue-300 transition">
+        <Plus/>
+      </button>
+    </PopoverTrigger>
+    <PopoverContent 
+      className="w-80 p-4 rounded-2xl shadow-lg bg-white border border-gray-200"
+      align="end"
+    >
+      <div className="space-y-4">
+        <NewTimeSheetSelection />
+      </div>
+    </PopoverContent>
+  </Popover>
+</div>
 
-            <h1 className="text-2xl text-center p-6"><strong>Time Sheets</strong></h1>
+      
+            
             <div className="max-w-6xl mx-auto bg-white shadow-md rounded overflow-hidden">
 
                 <table className="min-w-full text-sm text-gray-700">
@@ -24,7 +50,7 @@ export default async function TimeSheetPage() {
                             <th className="px-6 py-4 text-center">end-date</th>
                             <th className="px-6 py-4 text-center">status</th>
                             <th className="px-6 py-4 text-center">total hours</th>
-                            {/* <th className="px-6 py-4">actions</th> */}
+                            <th className="px-6 py-4">actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +79,19 @@ export default async function TimeSheetPage() {
                                             {entry.status}
                                         </span>
                                     </td>
+                                    
                                     <td className="px-6 py-4 text-center">{entry.total_hours}</td>
+                                    <td className="px-6 py-4 text-center">
+                            <div className="flex justify-center space-x-4">
+                                <button className="px-2 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                                    <Eye />
+                                    
+                                </button>
+                                <button className="px-2 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                                    <Download  />                                
+                                </button>
+                            </div>
+                        </td>
                                     {/* In future want a export button */}
                                 </tr>
 

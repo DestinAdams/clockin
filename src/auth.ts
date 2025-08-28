@@ -31,7 +31,7 @@
 
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
-import { NeonAdapter } from "@auth/neon-adapter"
+import  NeonAdapter  from "@auth/neon-adapter"
 import { Pool } from "@neondatabase/serverless"
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL })
